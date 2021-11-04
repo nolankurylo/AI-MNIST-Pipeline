@@ -1,38 +1,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from plotter import Plotter
 
 
-class EDA:
+class EDA(Plotter):
 
     def __init__(self):
-        pass
-
-    @staticmethod
-    def classes_bar_plot(train_y, test_y):
-        plt.figure(figsize=(20,10))
-        plt.subplot(1, 2, 1)
-        train_y.value_counts().plot(kind='bar')
-        plt.title("Number of Training Images by Class")
-        plt.xlabel('Class Name')
-        plt.ylabel('# Images')
-
-        plt.subplot(1, 2, 2)
-        test_y.value_counts().plot(kind='bar')
-        plt.title("Number of Testing Images by Class")
-        plt.xlabel('Class Name')
-        plt.ylabel('# Images')
-
-    @staticmethod
-    def display_images(X, y):
-        plt.figure(figsize=(10, 20))
-
-        for i in range(10):
-            plt.subplot(5, 2, i + 1)
-            img = X.iloc[np.where(y == i)[0][0]].values
-            plt.imshow(img.reshape(28, 28), cmap='gray')
-            plt.title(f"Image from Class: {i}")
-        plt.show()
+        Plotter.__init__(self)
 
     @staticmethod
     def descriptive_statistics(X):
@@ -48,4 +23,9 @@ class EDA:
                 constant_features.append(feature)
         return constant_features
 
+    def plot(self, arg1, arg2, plot_type):
+        if plot_type == "display_images":
+            self.display_images(X=arg1, y=arg2)
+        if plot_type == "classes_bar_plot":
+            self.classes_bar_plot(train_y=arg1, test_y=arg2)
 
