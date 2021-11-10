@@ -22,11 +22,3 @@ if __name__ == '__main__':
     X_test = preprocessor.scale(X_test)
 
     X_train_pca, X_test_pca = preprocessor.dimensionality_reduction(X_train, X_test, 0.8)
-    print(f"b: {preprocessor.num_components_before}, a: {preprocessor.num_components_after}")
-    preprocessor.plot(X_train, X_train_pca, y_train, plot_type='pca_images')
-
-    # img = new_X.iloc[0].values
-    # img2 = X_train.iloc[0].values
-    # plt.imshow(img.reshape(28, 28), cmap='gray')
-    # plt.imshow(img2.reshape(28, 28), cmap='gray')
-    # plt.show()
