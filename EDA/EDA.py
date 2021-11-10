@@ -1,13 +1,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from plotter import Plotter
+from utils import Utils
 
 
-class EDA(Plotter):
+class EDA(Utils):
 
     def __init__(self):
-        Plotter.__init__(self)
+        Utils.__init__(self)
 
     @staticmethod
     def descriptive_statistics(X):

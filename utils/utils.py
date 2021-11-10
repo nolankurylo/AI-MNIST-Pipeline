@@ -4,7 +4,7 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
 
-class Plotter:
+class Utils:
 
     classes = {0: 'T-shirt/top', 1: 'Trouser', 2: 'Pullover', 3: 'Dress', 4: 'Coat', 5: 'Sandal', 6: 'Shirt',
                7: 'Sneaker', 8: 'Bag', 9: 'Ankle boot'}
@@ -50,3 +50,14 @@ class Plotter:
         plt.title("Number of Testing Images by Class")
         plt.xlabel('Class Name')
         plt.ylabel('# Images')
+
+    @staticmethod
+    def plot_eigenvalues(pca):
+        plt.figure(figsize=(10, 20))
+
+        for i in range(5):
+            plt.subplot(3, 2, i + 1)
+            plt.suptitle("Top 5 Principal Components (Eigenfaces)")
+            plt.title("Principal Component: " + str(i + 1))
+            plt.imshow(pca.components_[i].reshape(28, 28), cmap='bone')
+        plt.show()

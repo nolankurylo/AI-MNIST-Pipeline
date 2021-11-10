@@ -2,16 +2,16 @@ import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-from plotter import Plotter
+from utils import Utils
 
 
-class DataPreprocessing(Plotter):
+class DataPreprocessing(Utils):
 
     def __init__(self):
         self.num_components_before = None
         self.num_components_after = None
         self.pca = None
-        Plotter.__init__(self)
+        Utils.__init__(self)
 
     @staticmethod
     def scale(X):
@@ -43,7 +43,7 @@ class DataPreprocessing(Plotter):
 
         return X_train_pca, X_test_pca
 
-    def plot(self, X, X_pca, y, plot_type):
+    def plot(self, *args, plot_type):
         """ Plot entry function to call Plotter child class
         :param X: original X
         :param X_pca: dimensionally reduced X
@@ -51,9 +51,9 @@ class DataPreprocessing(Plotter):
         :return: None
         """
         if plot_type == 'pca_images':
-            X_new = self.pca.inverse_transform(X_pca)
-            self.plot_pca(X, X_new, y)
+            X_new = self.pca.inverse_transform(args[1])
+            self.plot_pca(args[0], X_new, args[2])
         if plot_type == 'eigenfaces':
-            pass
+            self.plot_eigenvalues(self.pca)
 
 
