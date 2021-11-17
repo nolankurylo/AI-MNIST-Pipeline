@@ -17,21 +17,36 @@ class ModelTraining:
         self.y_test = y_test
 
     def neural_network(self):
+        print(self.X_train.shape)
         X_train = self.X_train.values.reshape(-1,28,28,1)
-        print(X_train.shape)
-        y_train = to_categorical(self.y_train, 10)
+        X_test = self.X_test.values.reshape(-1,28,28,1)
 
+        y_train = to_categorical(self.y_train, 10)
+        y_test = to_categorical(self.y_test, 10)
+        print(X_train.shape)
         model = Sequential([
-            # InputLayer(input_shape=(28, 28, 1)),  # input layer
-            # Conv2D(32, (3,3), activation='relu', kernel_initializer='he_uniform'),  # convolutional layer
-            # MaxPooling2D((2,2)),  # pooling layer
-            Flatten(input_shape=(28, 28, 1)),  # reshape
-            Dense(128, activation='relu'),  # fully connected layer
+            InputLayer(input_shape=(28, 28, 1)),  # input layer
+            Conv2D(16, (3,3), activation='relu'),  # convolutional layer
+            MaxPooling2D((2,2)),  # pooling layer
+            Conv2D(32, (3, 3), activation='relu'),  # convolutional layer
+            MaxPooling2D((2, 2)),  # pooling layer
+            # Conv2D(64, (3, 3), activation='relu'),  # convolutional layer
+            # MaxPooling2D((2, 2)),  # pooling layer
+            # Conv2D(64, (3, 3), activation='relu'),  # convolutional layer
+            # MaxPooling2D((2, 2)),  # pooling layer
+            # Conv2D(64, (3, 3), activation='relu'),  # convolutional layer
+            MaxPooling2D((2, 2)),  # pooling layer
+            Flatten(),  # reshape
+            Dense(512, activation='relu'),  # fully connected layer
+            # Dense(64, activation='relu'),  # fully connected layer
+
+
             Dense(10, activation="softmax")  # output layer
         ])
+        print(model.summary())
 
-        opt = Adam(lr=0.01)
+        opt = Adam(lr=3e-5)
         model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
-        model.fit(X_train, y_train, epochs=10, batch_size=256)
+        model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=20, batch_size=64)
         return model
 
