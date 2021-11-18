@@ -38,15 +38,15 @@ class Utils:
             plt.title(f"Image from Class: {self.classes[i]}")
         plt.show()
 
-    def classes_bar_plot(self, train_y, test_y):
+    def classes_bar_plot(self, y_train, y_test):
         plt.figure(figsize=(20, 10))
         plt.subplot(1, 2, 1)
-        train_y.value_counts().rename(self.classes).plot(kind='bar')
+        y_train.value_counts().rename(self.classes).plot(kind='bar')
         plt.title("Number of Training Images by Class")
         plt.xlabel('Class Name')
         plt.ylabel('# Images')
         plt.subplot(1, 2, 2)
-        test_y.value_counts().rename(self.classes).plot(kind='bar')
+        y_test.value_counts().rename(self.classes).plot(kind='bar')
         plt.title("Number of Testing Images by Class")
         plt.xlabel('Class Name')
         plt.ylabel('# Images')

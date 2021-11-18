@@ -8,20 +8,26 @@ from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn import svm
 from sklearn.model_selection import GridSearchCV
+import xgboost as xgb
 
 
 class ModelTraining:
 
     def __init__(self, X_train, y_train, X_test, y_test):
         self.X_train = X_train
-        self.y_train = y_train
+        self.y_train = y_train.values.reshape(-1,)
         self.X_test = X_test
         self.y_test = y_test
 
+    def xgboost(self):
+        model = xgb.XGBClassifier()
+        model.fit(self.X_train, self.y_train, verbose=True)
+        return model
+
     def neural_network(self):
         print(self.X_train.shape)
-        X_train = self.X_train.values.reshape(-1,28,28,1)
-        X_test = self.X_test.values.reshape(-1,28,28,1)
+        X_train = self.X_train.reshape(-1,28,28,1)
+        X_test = self.X_test.reshape(-1,28,28,1)
 
         y_train = to_categorical(self.y_train, 10)
         y_test = to_categorical(self.y_test, 10)
@@ -58,14 +64,14 @@ class ModelTraining:
     def support_vector_machine(self):
         # y_train = to_categorical(self.y_train, 10)
         # y_test = to_categorical(self.y_test, 10)
-        y_train = self.y_train.values.ravel()
+        y_train = self.y_train
         print(y_train)
         hyperparams = dict(
-            C=[0.1, 0.01, 0.001],
+            C=[345],
             gamma=[0.1, 0.001]
         )
 
-        search = GridSearchCV(estimator=svm.SVC(), param_grid=hyperparams, verbose=10)
+        search = GridSearchCV(estimator=svm.SVC(kernel='linear'), param_grid=hyperparams, verbose=10)
         search.fit(self.X_train, y_train)
         print("doone")
         model = search.best_estimator_
