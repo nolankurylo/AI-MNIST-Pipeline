@@ -41,7 +41,7 @@ class DataPreprocessing(Utils):
         self.num_components_before = X_train.shape[1]
         self.num_components_after = X_train_pca.shape[1]
 
-        return X_train_pca, X_test_pca
+        return pca.inverse_transform(X_train_pca), pca.inverse_transform(X_test_pca)
 
     def plot(self, *args, plot_type):
         """ Plot entry function to call Plotter child class
@@ -51,7 +51,7 @@ class DataPreprocessing(Utils):
         :return: None
         """
         if plot_type == 'pca_images':
-            X_new = self.pca.inverse_transform(args[1])
+            X_new = args[1]
             self.plot_pca(args[0], X_new, args[2])
         if plot_type == 'eigenfaces':
             self.plot_eigenvalues(self.pca)
