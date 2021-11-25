@@ -65,7 +65,7 @@ class ModelTraining:
             gamma=[0.1, 0.001]
         )
 
-        search = GridSearchCV(estimator=svm.SVC(), param_grid=hyperparams, verbose=10)
+        search = GridSearchCV(estimator=svm.SVC(kernel='linear'), param_grid=hyperparams, verbose=10)
         search.fit(self.X_train, y_train)
         print("doone")
         model = search.best_estimator_
