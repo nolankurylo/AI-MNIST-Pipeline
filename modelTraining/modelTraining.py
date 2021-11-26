@@ -15,7 +15,7 @@ class ModelTraining:
 
     def __init__(self, X_train, y_train, X_test, y_test):
         self.X_train = X_train
-        self.y_train = y_train.values.reshape(-1,)
+        self.y_train = y_train
         self.X_test = X_test
         self.y_test = y_test
 
@@ -56,10 +56,13 @@ class ModelTraining:
         opt = Adam(lr=3e-5)
         # opt = SGD(lr=0.01, momentum=0.9)
 
-        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50)
+        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
         model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
-        model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=200, batch_size=64, callbacks=[es])
+        model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=20, batch_size=64, callbacks=[es])
         return model
+
+
+
 
     def support_vector_machine(self):
         # y_train = to_categorical(self.y_train, 10)
