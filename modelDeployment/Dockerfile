@@ -5,7 +5,7 @@ WORKDIR ${LAMBDA_TASK_ROOT}
 RUN pip install -r requirements.txt
 
 COPY app.py ${LAMBDA_TASK_ROOT}
-COPY basic_mnist_nn.h5 ${LAMBDA_TASK_ROOT}
+COPY model.h5 ${LAMBDA_TASK_ROOT}
 
 #RUN file="$(ls -1 .)" && echo $file
 
