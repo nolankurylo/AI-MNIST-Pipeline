@@ -25,7 +25,7 @@ class Utils:
             plt.title("Projected Image - " + str(self.num_components_after) + " dimensions")
             X_image_pca = X_new[idx].reshape(28, 28)
             plt.imshow(X_image_pca, cmap='gray')
-            plt.suptitle(f"PCA Transformation for image from Class: {self.classes[i]}")
+            plt.suptitle(f"PCA Transformation for image from Class: {i}")
             plt.show()
 
     def display_images(self, X, y):
@@ -35,18 +35,18 @@ class Utils:
             plt.subplot(5, 2, i + 1)
             img = X.iloc[np.where(y == i)[0][0]].values
             plt.imshow(img.reshape(28, 28), cmap='gray')
-            plt.title(f"Image from Class: {self.classes[i]}")
+            plt.title(f"Image from Class: {i}")
         plt.show()
 
     def classes_bar_plot(self, y_train, y_test):
         plt.figure(figsize=(20, 10))
         plt.subplot(1, 2, 1)
-        y_train.value_counts().rename(self.classes).plot(kind='bar')
+        y_train.value_counts().plot(kind='bar')
         plt.title("Number of Training Images by Class")
         plt.xlabel('Class Name')
         plt.ylabel('# Images')
         plt.subplot(1, 2, 2)
-        y_test.value_counts().rename(self.classes).plot(kind='bar')
+        y_test.value_counts().plot(kind='bar')
         plt.title("Number of Testing Images by Class")
         plt.xlabel('Class Name')
         plt.ylabel('# Images')

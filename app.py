@@ -1,27 +1,22 @@
+import pandas as pd
+import pickle as pk
 from dataAcquisition import DataAcquisition
 from dataPreprocessing import DataPreprocessing
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.datasets import fashion_mnist
-
+from modelTraining import ModelTraining
+from keras.datasets import mnist
 
 
 if __name__ == '__main__':
-    data_acquirer = DataAcquisition()
+    acquirer = DataAcquisition()
     preprocessor = DataPreprocessing()
 
-    X_train, X_test, y_train, y_test = data_acquirer.acquire_data()
-    data_acquirer = DataAcquisition()
-
-    X_train.to_csv("data/X_train.csv", index=False)
-    y_train.to_csv("data/y_train.csv", index=False)
-    X_test.to_csv("data/X_test.csv", index=False)
-    y_test.to_csv("data/y_test.csv", index=False)
-    print(X_train.shape)
+    X_train, X_test, y_train, y_test = acquirer.acquire_data()
 
     X_train = preprocessor.scale(X_train)
     X_test = preprocessor.scale(X_test)
 
-    X_train_pca, X_test_pca = preprocessor.dimensionality_reduction(X_train, X_test, 0.8)
+    trainer = ModelTraining(X_train, y_train, X_test, y_test)
+
+    model = trainer.neural_network()
+
     print("DONE")
