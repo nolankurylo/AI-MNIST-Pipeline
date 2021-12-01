@@ -1,9 +1,0 @@
-Data acquisition
-
-eda/main.ipynb
-
-app
-    - data aq
-    - preprocess
-    - modelling
-    - deploy
