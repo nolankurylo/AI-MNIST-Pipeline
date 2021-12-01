@@ -18,6 +18,10 @@ class ModelTraining:
         self.y_test = y_test
 
     def xgboost(self):
+        """
+        XGBoost classifier that was used for initial model testing
+        :return:
+        """
         model = xgb.XGBClassifier()
         model.fit(self.X_train, self.y_train, verbose=True)
         return model
