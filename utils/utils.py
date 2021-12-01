@@ -6,13 +6,16 @@ import matplotlib.pyplot as plt
 
 class Utils:
 
-    classes = {0: 'T-shirt/top', 1: 'Trouser', 2: 'Pullover', 3: 'Dress', 4: 'Coat', 5: 'Sandal', 6: 'Shirt',
-               7: 'Sneaker', 8: 'Bag', 9: 'Ankle boot'}
-
     def __init__(self):
         pass
 
     def plot_pca(self, X, X_new, y):
+        """ Plot the principal components of the dataframe X
+        :param X: original dataframe
+        :param X_new: dimensionally reduced and reconstructed dataframe
+        :param y: target
+        :return: None
+        """
         plt.figure(figsize=(10, 20))
         for i in range(0, 10):  # print 3 random images and compare them to the PCA reduced images
             idx = np.where(y == i)[0][0]
@@ -29,6 +32,11 @@ class Utils:
             plt.show()
 
     def display_images(self, X, y):
+        """ Display an image for each class
+        :param X: dataframe of pixels
+        :param y: target
+        :return: None
+        """
         plt.figure(figsize=(10, 20))
 
         for i in range(10):
@@ -39,6 +47,11 @@ class Utils:
         plt.show()
 
     def classes_bar_plot(self, y_train, y_test):
+        """ Display the unique counts of each class in training and testing sets
+        :param y_train: training targets
+        :param y_test: testing targets
+        :return: None
+        """
         plt.figure(figsize=(20, 10))
         plt.subplot(1, 2, 1)
         y_train.value_counts().plot(kind='bar')
@@ -53,6 +66,11 @@ class Utils:
 
     @staticmethod
     def plot_eigenvalues(pca):
+        """
+        Displays the top principal components in the form of their Eigenfaces
+        :param pca: fitted object containing the principal components
+        :return: None
+        """
         plt.figure(figsize=(10, 20))
 
         for i in range(5):

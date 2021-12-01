@@ -55,5 +55,3 @@ class DataPreprocessing(Utils):
             self.plot_pca(args[0], X_new, args[2])
         if plot_type == 'eigenfaces':
             self.plot_eigenvalues(self.pca)
-
-

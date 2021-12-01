@@ -39,4 +39,3 @@ class EDA(Utils):
             self.display_images(X=arg1, y=arg2)
         if plot_type == "classes_bar_plot":
             self.classes_bar_plot(y_train=arg1, y_test=arg2)
-

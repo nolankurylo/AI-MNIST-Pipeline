@@ -1,9 +1,6 @@
-import pandas as pd
-import pickle as pk
 from dataAcquisition import DataAcquisition
 from dataPreprocessing import DataPreprocessing
 from modelTraining import ModelTraining
-from keras.datasets import mnist
 
 
 if __name__ == '__main__':

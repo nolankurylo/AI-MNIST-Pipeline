@@ -35,10 +35,3 @@ class DataAcquisition:
         y_test.to_csv("data/y_test.csv", index=False)
 
         return X_train, X_test, y_train, y_test
-
-
-
-
-
-
-
